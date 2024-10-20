@@ -4,6 +4,17 @@ server:
     context-path: /
 
 spring:
+  cloud:
+    nacos:
+      server-addr: 127.0.0.1:8848
+      discovery:
+        namespace: 4430ef57-603d-47cd-b87f-58b923270bdc
+      config:
+        file-extension: yaml
+        namespace: 4430ef57-603d-47cd-b87f-58b923270bdc
+  config:
+    import:
+      - optional:nacos:${spring.application.name}.${spring.cloud.nacos.config.file-extension}
   # 当 HTTP 状态码为 4xx 时直接抛出异常
   mvc:
     throw-exception-if-no-handler-found: true
